@@ -67,17 +67,3 @@ todo.addEventListener('contextmenu', function(event){
 		}
 	});
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
