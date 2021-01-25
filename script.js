@@ -1,21 +1,21 @@
+let todoList = [];
+
 let addMessage = document.querySelector('.message'),
 	addButton = document.querySelector('.add'),
 	todo = document.querySelector('.todo');
 
 
-let todoList = [];
-
-if(localStorage.getItem('todo')){
+if(localStorage.getItem('todo')) {
 	todoList = JSON.parse(localStorage.getItem('todo'));
 	displayMessages();
 }
-addButton.addEventListener('click', function(){
+
+addButton.addEventListener('click', function() {
 if (!addMessage.value) return;
 	let newTodo = {
 		todo: addMessage.value,
 		checked: false,
 		important: false
-
 	};
 	
 	todoList.push(newTodo);
@@ -24,22 +24,19 @@ if (!addMessage.value) return;
 	addMessage.value = '';
 });
 
-function displayMessages()
-{
+function displayMessages() {
 	let displayMessage = '';
 	todoList.forEach(function(item, i){
-		displayMessage += `
-		<li>
+		displayMessage += `<li>
 			<input type='checkbox' id='item_${i}' ${item.checked ? 'checked' : ''}>
 			<label for='item_${i}' class="${item.important ? 'important' : ''}">${item.todo}</label>
-		</li>
-		`;
+		</li>`;
 		todo.innerHTML = displayMessage;
 	});
 }
 
 
-todo.addEventListener('change', function(event){
+todo.addEventListener('change', function(event) {
 	let valueLabel = todo.querySelector('[for='+event.target.getAttribute('id')+']').innerHTML;
 	console.log('valueLabe: ', valueLabel);
 	todoList.forEach(function(item){
@@ -51,7 +48,7 @@ todo.addEventListener('change', function(event){
 });
 
 
-todo.addEventListener('contextmenu', function(event){
+todo.addEventListener('contextmenu', function(event) {
 	event.preventDefault();
 	todoList.forEach(function(item, i){
 		if(item.todo === event.target.innerHTML)
